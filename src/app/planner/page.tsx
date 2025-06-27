@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import MealPlanner from "@/components/MealPlanner";
 import Loading from "@/components/Loading";
+import Footer from "@/components/Footer";
 
 export default function PlannerPage() {
   const { user, loading } = useAuth();
@@ -29,7 +30,7 @@ export default function PlannerPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <MealPlanner />
-      <footer className="mt-2 py-8 bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 shadow-lg border-b border-purple-400 backdrop-blur-sm text-center h-[10dvh] text-white">{new Date().getFullYear()}</footer>
+      <Footer />
     </div>
   );
 } 

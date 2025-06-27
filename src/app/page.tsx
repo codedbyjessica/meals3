@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function WelcomePage() {
   return (
@@ -120,9 +121,7 @@ export default function WelcomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 shadow-lg border-t border-purple-400 backdrop-blur-sm text-center text-white">
-        <p>&copy; {new Date().getFullYear()} Crumb All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

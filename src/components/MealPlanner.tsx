@@ -602,7 +602,8 @@ export default function MealPlanner() {
                             onChange={(e) => setNotesInput(e.target.value)}
                             onBlur={() => handleSaveNotes(dateKey)}
                             onKeyDown={(e) => {
-                              if (e.key === 'Enter' && e.ctrlKey) {
+                              if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
                                 handleSaveNotes(dateKey);
                               } else if (e.key === 'Escape') {
                                 handleCancelNotesEdit();
@@ -610,10 +611,8 @@ export default function MealPlanner() {
                             }}
                             autoFocus
                           />
-                          <div className="flex gap-1 mt-1 text-[8px] text-gray-500">
-                            <span>Ctrl+Enter - save</span>
-                            <span>•</span>
-                            <span>Esc - cancel</span>
+                          <div className="flex gap-1 mt-1 text-[10px] text-gray-500">
+                            <span>Shift+Enter - new line</span>
                           </div>
                         </div>
                       ) : (

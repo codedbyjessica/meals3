@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import RecipeManager from "@/components/RecipeManager";
 import Loading from "@/components/Loading";
+import Footer from "@/components/Footer";
 
 export default function RecipesPage() {
   const { user, loading } = useAuth();
@@ -37,9 +38,7 @@ export default function RecipesPage() {
         </div>
         <RecipeManager />
       </div>
-      <footer className="mt-2 py-8 bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 shadow-lg border-b border-purple-400 backdrop-blur-sm text-center h-[10dvh] text-white">
-        {new Date().getFullYear()}
-      </footer>
+      <Footer />
     </div>
   );
 } 

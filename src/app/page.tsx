@@ -11,7 +11,7 @@ export default function WelcomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <h1 className="text-xl font-bold text-white">
-                What we eats today?
+                Crumb
               </h1>
             </div>
             <div className="flex items-center gap-4">
@@ -36,11 +36,13 @@ export default function WelcomePage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-            Plan Your Meals with Joy
+            Crumb
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Organize your weekly meals, discover new recipes, and never wonder &ldquo;what&apos;s for dinner&rdquo; again. 
-            Our intuitive meal planner helps you create delicious, organized meal plans for you and your family.
+          <p className="text-xl text-gray-600 mb-4 max-w-3xl mx-auto">
+            Save the recipes you actually love
+          </p>
+          <p className="text-gray-600 mb-8 max-w-3xl mx-auto">
+            For those to love to plan and sometimes you just need some measurements, a few instructions and a place to keep them all instead of scrolling through the internet and reading someone's entire family history before you get to the ingredients list just to find out you're missing 1tbsp of crème fraîche 
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -79,9 +81,9 @@ export default function WelcomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">Recipe Library</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Recipe Collection</h3>
             <p className="text-gray-600">
-              Build your personal recipe collection with ingredients, instructions, and cooking times.
+              Save and organize the recipes you actually love with ingredients, instructions, and cooking times.
             </p>
           </div>
 
@@ -102,10 +104,10 @@ export default function WelcomePage() {
         <div className="mt-16 text-center">
           <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-purple-200 p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Ready to Transform Your Meal Planning?
+              Ready to Save Your Favorite Recipes?
             </h2>
             <p className="text-gray-600 mb-6">
-              Join thousands of users who have simplified their meal planning and cooking experience.
+              Join thousands of users who have simplified their meal planning and cooking experience with Crumb.
             </p>
             <Link
               href="/signup"
@@ -119,7 +121,7 @@ export default function WelcomePage() {
 
       {/* Footer */}
       <footer className="mt-16 py-8 bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 shadow-lg border-t border-purple-400 backdrop-blur-sm text-center text-white">
-        <p>&copy; {new Date().getFullYear()} What we eats today? All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Crumb All rights reserved.</p>
       </footer>
     </div>
   );

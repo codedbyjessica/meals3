@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "What we eats today?",
-  description: "Burr fam meal planner",
+  title: "Crumb",
+  description: "Save the recipes you actually love",
 };
 
 export default function RootLayout({

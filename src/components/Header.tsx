@@ -26,7 +26,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-8">
             <Link href="/" className="text-xl font-bold text-white hover:text-white/90 transition-colors">
-              What we eats today?
+              Crumb
             </Link>
             <nav className="hidden md:flex items-center gap-6">
               <Link

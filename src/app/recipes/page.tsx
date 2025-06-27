@@ -30,9 +30,9 @@ export default function RecipesPage() {
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Recipe Library</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Recipe Collection</h1>
           <p className="text-gray-600">
-            Manage your personal recipe collection. Add new recipes, edit existing ones, and organize them with tags.
+            Save and organize the recipes you actually love. Add new recipes, edit existing ones, and organize them with tags.
           </p>
         </div>
         <RecipeManager />

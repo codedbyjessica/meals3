@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Loading from '@/components/Loading';
 
@@ -13,7 +13,6 @@ export default function ResetPasswordPage() {
   const [success, setSuccess] = useState(false);
   const { updatePassword, loading, error, user } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (user) {

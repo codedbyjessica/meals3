@@ -155,17 +155,6 @@ export default function MealPlanner() {
     setShowIngredients(null);
   };
 
-  const handleNotesChange = async (date: string, notes: string) => {
-    const updatedPlanner = {
-      ...currentPlanner,
-      [date]: {
-        ...currentPlanner[date],
-        notes: notes,
-      },
-    };
-    await savePlanner(updatedPlanner);
-  };
-
   const handleStartNotesEdit = (date: string) => {
     setEditingNotes(date);
     setNotesInput(currentPlanner[date]?.notes || "");

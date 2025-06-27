@@ -39,7 +39,7 @@ export default function WelcomePage() {
             Plan Your Meals with Joy
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Organize your weekly meals, discover new recipes, and never wonder "what's for dinner" again. 
+            Organize your weekly meals, discover new recipes, and never wonder &ldquo;what&apos;s for dinner&rdquo; again. 
             Our intuitive meal planner helps you create delicious, organized meal plans for you and your family.
           </p>
           

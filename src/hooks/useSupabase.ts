@@ -1,6 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { type Meal, type Planner } from '@/types/meal';
+
+interface PlannerPayload {
+  id: string;
+  user_id: string;
+  data: Planner;
+  updated_at: string;
+}
 
 export function useSupabase() {
   const [planner, setPlanner] = useState<Planner>({});
@@ -17,7 +24,7 @@ export function useSupabase() {
   };
 
   // Load recipes from Supabase
-  const loadRecipes = async () => {
+  const loadRecipes = useCallback(async () => {
     try {
       setError(null);
       
@@ -40,7 +47,7 @@ export function useSupabase() {
       setError('Failed to load recipes');
       console.error('Error loading recipes:', err);
     }
-  };
+  }, []);
 
   // Save planner data to Supabase
   const savePlanner = async (plannerData: Planner) => {
@@ -83,7 +90,7 @@ export function useSupabase() {
   };
 
   // Load planner data from Supabase
-  const loadPlanner = async () => {
+  const loadPlanner = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -115,7 +122,7 @@ export function useSupabase() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Update a specific meal
   const updateMeal = async (day: string, mealType: string, meal: Meal) => {
@@ -172,7 +179,7 @@ export function useSupabase() {
           }
           
           if (payload.new) {
-            const plannerData = (payload.new as any).data;
+            const plannerData = (payload.new as PlannerPayload).data;
             console.log('Setting planner state to:', plannerData);
             setPlanner(plannerData);
           } else {
@@ -210,7 +217,7 @@ export function useSupabase() {
       supabase.removeChannel(plannerSubscription);
       supabase.removeChannel(recipesSubscription);
     };
-  }, [isUpdating]);
+  }, [isUpdating, loadPlanner, loadRecipes]);
 
   return {
     planner,

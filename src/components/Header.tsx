@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Header() {
   const { user, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   if (!user) {
     return null;
@@ -44,6 +45,7 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-4">
+            
             <div className="relative">
               <button
                 onClick={() => setShowDropdown(!showDropdown)}
@@ -83,15 +85,61 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="md:hidden text-white hover:text-white/90 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {showMobileMenu ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+            
           </div>
         </div>
+        
+        {/* Mobile menu */}
+        {showMobileMenu && (
+          <div className="md:hidden border-t border-purple-400">
+            <nav className="flex flex-col py-4 space-y-4">
+              <Link
+                href="/planner"
+                className="text-white hover:text-white/90 text-sm font-medium transition-colors px-4 py-2 hover:bg-white/10 rounded-lg"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Meal Planner
+              </Link>
+              <Link
+                href="/recipes"
+                className="text-white hover:text-white/90 text-sm font-medium transition-colors px-4 py-2 hover:bg-white/10 rounded-lg"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Recipes
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
       
-      {/* Click outside to close dropdown */}
-      {showDropdown && (
+      {/* Click outside to close dropdowns */}
+      {(showDropdown || showMobileMenu) && (
         <div
           className="fixed inset-0 z-40"
-          onClick={() => setShowDropdown(false)}
+          onClick={() => {
+            setShowDropdown(false);
+            setShowMobileMenu(false);
+          }}
         />
       )}
     </header>

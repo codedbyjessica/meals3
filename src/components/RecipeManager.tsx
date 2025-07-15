@@ -135,13 +135,34 @@ export default function RecipeManager() {
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveRecipe(formData);
+    const processedData = processArrayFields(formData);
+    saveRecipe(processedData);
   };
 
   // Handle array field changes
   const handleArrayFieldChange = (field: keyof Meal, value: string) => {
-    const items = value.split(',').map(item => item.trim()).filter(item => item !== '');
-    setFormData(prev => ({ ...prev, [field]: items }));
+    // Store the raw input value, don't process it immediately
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Process array fields when form is submitted
+  const processArrayFields = (data: any) => {
+    const processed = { ...data };
+    ['ingredients', 'aromatics', 'condiments', 'tags'].forEach(field => {
+      if (typeof processed[field] === 'string') {
+        processed[field] = processed[field].split(',').map(item => item.trim()).filter(item => item !== '');
+      }
+    });
+    return processed;
+  };
+
+  // Helper function to get display value for array fields
+  const getArrayFieldValue = (field: keyof Meal) => {
+    const value = formData[field];
+    if (Array.isArray(value)) {
+      return value.join(', ');
+    }
+    return value || '';
   };
 
   // Get all unique tags
@@ -277,7 +298,7 @@ export default function RecipeManager() {
             </label>
             <input
               type="text"
-              value={formData.ingredients.join(', ')}
+              value={getArrayFieldValue('ingredients')}
               onChange={(e) => handleArrayFieldChange('ingredients', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="e.g., chicken, rice, vegetables"
@@ -290,7 +311,7 @@ export default function RecipeManager() {
             </label>
             <input
               type="text"
-              value={formData.aromatics.join(', ')}
+              value={getArrayFieldValue('aromatics')}
               onChange={(e) => handleArrayFieldChange('aromatics', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="e.g., garlic, onion, ginger"
@@ -303,7 +324,7 @@ export default function RecipeManager() {
             </label>
             <input
               type="text"
-              value={formData.condiments.join(', ')}
+              value={getArrayFieldValue('condiments')}
               onChange={(e) => handleArrayFieldChange('condiments', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="e.g., soy sauce, salt, pepper"
@@ -329,7 +350,7 @@ export default function RecipeManager() {
             </label>
             <input
               type="text"
-              value={formData.tags?.join(', ') || ''}
+              value={getArrayFieldValue('tags')}
               onChange={(e) => handleArrayFieldChange('tags', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="e.g., quick, vegetarian, spicy"
@@ -367,15 +388,21 @@ export default function RecipeManager() {
               <div className="flex gap-1">
                 <button
                   onClick={() => editRecipe(recipe)}
-                  className="text-blue-600 hover:text-blue-800 text-sm"
+                  className="text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50 transition-colors"
+                  title="Edit recipe"
                 >
-                  Edit
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
                 </button>
                 <button
                   onClick={() => deleteRecipe(recipe.id!)}
-                  className="text-red-600 hover:text-red-800 text-sm"
+                  className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-50 transition-colors"
+                  title="Delete recipe"
                 >
-                  Delete
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -433,7 +460,7 @@ export default function RecipeManager() {
             {recipe.instructions && (
               <div className="mb-3">
                 <h4 className="text-sm font-medium text-gray-700 mb-1">Instructions:</h4>
-                <p className="text-sm text-gray-600 line-clamp-2">
+                <p className="text-sm text-gray-600">
                   {recipe.instructions}
                 </p>
               </div>

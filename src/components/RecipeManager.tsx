@@ -146,14 +146,17 @@ export default function RecipeManager() {
   };
 
   // Process array fields when form is submitted
-  const processArrayFields = (data: any) => {
+  const processArrayFields = (data: Meal) => {
     const processed = { ...data };
-    ['ingredients', 'aromatics', 'condiments', 'tags'].forEach(field => {
-      if (typeof processed[field] === 'string') {
-        processed[field] = processed[field].split(',').map(item => item.trim()).filter(item => item !== '');
+    const arrayFields: (keyof Meal)[] = ['ingredients', 'aromatics', 'condiments', 'tags'];
+    
+    arrayFields.forEach(field => {
+      const value = processed[field];
+      if (typeof value === 'string') {
+        (processed as Record<string, unknown>)[field] = value.split(',').map(item => item.trim()).filter(item => item !== '');
       }
     });
-    return processed;
+    return processed as Meal;
   };
 
   // Helper function to get display value for array fields
